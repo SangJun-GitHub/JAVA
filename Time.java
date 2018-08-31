@@ -1,38 +1,50 @@
 package com.sangjun.Object_oriented_Programming1;
 
 public class Time {
-    private int hour;
-    private int minute;
-    private int second;
+    private long hour;
+    private long minute;
+    private long second;
 
-    public int getHour(){return hour;}
-    public int getMinute(){return minute;}
-    public int getSecond(){return second;}
+    public long getHour(){return hour;}
+    public long getMinute(){return minute;}
+    public long getSecond(){return second;}
 
-    public void setHour(int h) {
+    public void setHour(long h) {
         if(h < 0 || h > 23)
             return;
         hour = h;
     }
 
-    public void setMinute(int m){
+    public void setMinute(long m){
         if(m < 0 || m > 60)
             return;
         minute = m;
     }
 
-    public void setSecond(int s){
+    public void setSecond(long s){
         if(s < 0 || s > 60)
             return;
         second = s;
     }
-
-    static Time compareTime(Time t1, Time t2){
+    public static long convertTOSecond(Time t)
+    {
+        long totalSecond = t.second;
+        totalSecond += t.minute * 60;
+        totalSecond += t.hour * 60 * 60;
+        return totalSecond;
+    }
+    public static Time convertToTime(long totalSecond)
+    {
         Time result = new Time();
-        result.hour = (t1.getHour() - t2.getHour());
-        result.minute = (t1.getMinute() - t2.getMinute());
-        result.second = (t1.getSecond() - t2.getSecond());
+        result.setHour(totalSecond / 60 / 60);
+        result.setMinute((totalSecond - (result.getHour() * 60 * 60)) / 60);
+        result.setSecond(totalSecond - ((result.getHour() * 60 * 60) +(result.getMinute() * 60)));
         return result;
+    }
+
+    public static Time compareTime(Time t1, Time t2){
+        long diff = convertTOSecond(t1) - convertTOSecond(t2);
+        return convertToTime(diff);
     }
 
     @Override
@@ -46,7 +58,7 @@ public class Time {
 
     public static void main(String[] args){
         Time time1 = new Time();
-        time1.setHour(1);
+        time1.setHour(16);
         time1.setMinute(29);
         time1.setSecond(32);
 
