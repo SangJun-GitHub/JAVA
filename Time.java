@@ -43,8 +43,15 @@ public class Time {
     }
 
     public static Time compareTime(Time t1, Time t2){
-        long diff = convertTOSecond(t1) - convertTOSecond(t2);
-        return convertToTime(diff);
+        long a = convertTOSecond(t1);
+        long b = convertTOSecond(t2);
+        if(a < b) {
+            long c;
+            c = a;
+            a = b;
+            b = c;
+        }
+        return convertToTime(a - b);
     }
 
     @Override
@@ -58,7 +65,7 @@ public class Time {
 
     public static void main(String[] args){
         Time time1 = new Time();
-        time1.setHour(16);
+        time1.setHour(14);
         time1.setMinute(29);
         time1.setSecond(32);
 
@@ -70,7 +77,7 @@ public class Time {
 
         System.out.println(time1);
         System.out.println(time2);
-        System.out.println(compareTime(time1, time2));
+        System.out.println( "time1 and time2 difference is "+ compareTime(time1, time2));
     }
 }
 
