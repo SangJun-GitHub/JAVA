@@ -42,16 +42,22 @@ public class Time {
         return result;
     }
 
-    public static Time compareTime(Time t1, Time t2){
+    public static Time gepTime(Time t1, Time t2){
+        if(!firstMuch(t1, t2)) {
+            Time t3 = t1;
+            t1 = t2;
+            t2 = t3;
+        }
+
+        return convertToTime(convertTOSecond(t1) - convertTOSecond(t2));
+    }
+
+    public static boolean firstMuch(Time t1, Time t2){
         long a = convertTOSecond(t1);
         long b = convertTOSecond(t2);
-        if(a < b) {
-            long c;
-            c = a;
-            a = b;
-            b = c;
-        }
-        return convertToTime(a - b);
+        if (a > b)
+            return true;
+        return false;
     }
 
     @Override
@@ -65,7 +71,7 @@ public class Time {
 
     public static void main(String[] args){
         Time time1 = new Time();
-        time1.setHour(14);
+        time1.setHour(18);
         time1.setMinute(29);
         time1.setSecond(32);
 
@@ -77,7 +83,12 @@ public class Time {
 
         System.out.println(time1);
         System.out.println(time2);
-        System.out.println( "time1 and time2 difference is "+ compareTime(time1, time2));
+        if(firstMuch(time1, time2))
+            System.out.println("time1 is much than time2");
+        else
+            System.out.println("time2 is much than time1");
+
+        System.out.println("Between time1 and time2, difference is "+ gepTime(time1, time2));
     }
 }
 
