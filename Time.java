@@ -32,13 +32,6 @@ public class Time {
             return;
         second = s;
     }
-    public long convertTOSecond(Time t)
-    {
-        long totalSecond = t.second;
-        totalSecond += t.minute * 60;
-        totalSecond += t.hour * 60 * 60;
-        return totalSecond;
-    }
 
     @Override
     public String toString() {
@@ -50,46 +43,55 @@ public class Time {
                 ;
     }
 
-    public Time convertToTime(long totalSecond)
-    {
-        Time result = new Time();
-        result.setName("result");
-        result.setHour(totalSecond / 60 / 60);
-        result.setMinute((totalSecond - (result.getHour() * 60 * 60)) / 60);
-        result.setSecond(totalSecond - ((result.getHour() * 60 * 60) +(result.getMinute() * 60)));
-        return result;
-    }
-
-    public void timeGap(Time t1, Time t2){
-        if(!comparator(t1, t2)) {
-            Time t3 = t1;
-            t1 = t2;
-            t2 = t3;
+    static class TimeUtil{
+        public static boolean comparator(Time t1, Time t2){
+            long a = convert(t1);
+            long b = convert(t2);
+            if (a > b)
+                return true;
+            return false;
         }
-        System.out.println("Between " +t1.getName() + " and " + t2.getName()+", difference is "
-                + convertToTime(convertTOSecond(t1) - convertTOSecond(t2)));
-    }
 
-    public boolean comparator(Time t1, Time t2){
-        long a = convertTOSecond(t1);
-        long b = convertTOSecond(t2);
-        if (a > b)
-            return true;
-        return false;
-    }
+        public static void comparatorPrint(Time t1, Time t2){
 
-    public void comparatorPrint(Time t1, Time t2){
+            if(convert(t1) == convert(t2)){
+                System.out.println(t1.getName() + " and " + t2.getName() + " are same");
+            } else{
+                if(comparator(t1, t2))
+                    System.out.println(t1.getName() + " is much than " + t2.getName());
+                else
+                    System.out.println(t2.getName() + " is much than " + t1.getName());
+            }
+        }
 
-        if(convertTOSecond(t1) == convertTOSecond(t2)){
-            System.out.println(t1.getName() + " and " + t2.getName() + " are same");
-        } else{
-            if(comparator(t1, t2))
-                System.out.println(t1.getName() + " is much than " + t2.getName());
-            else
-                System.out.println(t2.getName() + " is much than " + t1.getName());
+        public static Time convert(long totalSecond)
+        {
+            Time result = new Time();
+            result.setName("result");
+            result.setHour(totalSecond / 60 / 60);
+            result.setMinute((totalSecond - (result.getHour() * 60 * 60)) / 60);
+            result.setSecond(totalSecond - ((result.getHour() * 60 * 60) +(result.getMinute() * 60)));
+            return result;
+        }
+
+        public static void timeGap(Time t1, Time t2){
+            System.out.println("Between " +t1.getName() + " and " + t2.getName()+", difference is ");
+            if(!comparator(t1, t2)) {
+                Time t3 = t1;
+                t1 = t2;
+                t2 = t3;
+            }
+            System.out.println(convert(convert(t1) - convert(t2)));
+        }
+
+        public static long convert(Time t)
+        {
+            long totalSecond = t.second;
+            totalSecond += t.minute * 60;
+            totalSecond += t.hour * 60 * 60;
+            return totalSecond;
         }
     }
-
 
     public static void main(String[] args){
         System.out.println("Test1");
@@ -108,9 +110,9 @@ public class Time {
         System.out.println(time1);
         System.out.println(time2);
 
-        Time compare = new Time();
-        compare.comparatorPrint(time1, time2);
-        compare.timeGap(time1, time2);
+
+        TimeUtil.comparatorPrint(time1, time2);
+        TimeUtil.timeGap(time1, time2);
 
         System.out.println("\nTest2");
 
@@ -125,8 +127,8 @@ public class Time {
         System.out.println(time1);
         System.out.println(time2);
 
-        compare.comparatorPrint(time1, time2);
-        compare.timeGap(time1, time2);
+        TimeUtil.comparatorPrint(time1, time2);
+        TimeUtil.timeGap(time1, time2);
 
         System.out.println("\nTest3");
 
@@ -141,8 +143,8 @@ public class Time {
         System.out.println(time1);
         System.out.println(time2);
 
-        compare.comparatorPrint(time1, time2);
-        compare.timeGap(time1, time2);
+        TimeUtil.comparatorPrint(time1, time2);
+        TimeUtil.timeGap(time1, time2);
 
 
     }
