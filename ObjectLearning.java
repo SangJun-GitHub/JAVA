@@ -2,12 +2,7 @@ package com.sangjun.java_practice;
 
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.nio.file.Paths;
 import java.util.Date;
-import java.util.Objects;
-import java.util.Scanner;
 
 import static junit.framework.TestCase.*;
 
@@ -139,22 +134,4 @@ public class ObjectLearning {
         System.out.println(new Date().toString());
     }
 
-
-    @Test
-    public void hMartTest() throws ClassNotFoundException, IllegalAccessException, InstantiationException, FileNotFoundException {
-        Hmart hmartFinch = new Hmart();
-        System.out.println(hmartFinch.toString());
-        //  assertTrue(hmartFinch.getName().equals("DEFAULT_NAME"));
-
-        Class hmartClass = hmartFinch.getClass();//Hmart.class;
-        System.out.println(hmartClass.getName());
-        Hmart hmart = (Hmart) Class.forName("com.studygroup.lang.Hmart")
-                .newInstance();
-
-        Scanner scanner = new Scanner(new FileReader(Paths.get(".","src/main/resources","class.info").toString()));
-        Class patClass = Class.forName( scanner.nextLine() );
-        PAT pat = (PAT) patClass.newInstance();
-        assertNotNull(pat);
-
-    }
 }
