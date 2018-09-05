@@ -110,7 +110,6 @@ public class Time {
         System.out.println(time1);
         System.out.println(time2);
 
-
         TimeUtil.comparatorPrint(time1, time2);
         TimeUtil.timeGap(time1, time2);
 
