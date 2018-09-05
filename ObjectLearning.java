@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Date;
 
 import static junit.framework.TestCase.*;
+import static org.junit.Assert.assertNotEquals;
 
 public class ObjectLearning {
 
@@ -17,13 +18,29 @@ public class ObjectLearning {
         String name;
         int age;
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
         public void sayYourName() {
             System.out.println("My name is " + name);
         }
 
         @Override
         public boolean equals(Object classTemp) {
-            ClassTemp counterPart =((ClassTemp)classTemp);////////////////////////////
+            ClassTemp counterPart =((ClassTemp)classTemp);
             return name.equals(counterPart.name);
         }
     }
@@ -54,14 +71,16 @@ public class ObjectLearning {
 
 
         ClassTemp classTemp1 = new ClassTemp();
+        classTemp1.setName("classTemp1");
         classTemp1.sayYourName();
+        System.out.println(classTemp1.getName());
 
         ClassTemp classTemp2 = new ClassTemp();
-        classTemp2.sayYourName();
+        classTemp2.setName("calssTemp2");
+        System.out.println(classTemp2.getName());
 
-        classTemp1.equals(classTemp2);
-
-        "dfsdf".equals("dfsdf");
+        classTemp1.equals(classTemp2);//////////
+        "dfsdf".equals("dfsdf");///////////////
 
     }
 
@@ -69,11 +88,11 @@ public class ObjectLearning {
     public void test1() {
         ClassTemp classTemp1 = new ClassTemp();
         classTemp1.sayYourName();
-        classTemp1.name = "siwoo";
+        classTemp1.name = "sangjun";
         classTemp1.age = 20;
         ClassTemp classTemp2 = new ClassTemp();
         classTemp2.sayYourName();
-        classTemp2.name = "siwoo";
+        classTemp2.name = "sangjun";
         classTemp2.age = 30;
 
         assertTrue(classTemp1.equals(classTemp2));
@@ -95,6 +114,7 @@ public class ObjectLearning {
         assertTrue(schoolTemp1.studentNum == 5);
         schoolTemp1.studentNum = 90;
         assertTrue(schoolTemp2.studentNum == 90);
+        System.out.println(schoolTemp2.studentNum);
     }
 
     public static class Person {
@@ -121,7 +141,7 @@ public class ObjectLearning {
         System.out.println(person.toString());
 
         Person person1 = new Person();
-        person1.name = "siwoo";
+        person1.name = "sangjun";
         person1.salary = 200.2;
 
         Person person2 = new Person();
@@ -130,6 +150,9 @@ public class ObjectLearning {
 
         System.out.println(person1);
         System.out.println(person2);
+        assertEquals(person1.name, person2.name);
+        assertNotEquals(person1.salary, person2.salary);
+        assertFalse(person1.equals(person2));
 
         System.out.println(new Date().toString());
     }
