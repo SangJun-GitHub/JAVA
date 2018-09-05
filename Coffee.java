@@ -1,4 +1,5 @@
 package com.sangjun.java_practice;
+//Calendar and DecimalFormatting
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -6,8 +7,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static java.util.Calendar.DATE;
+import static org.junit.Assert.assertEquals;
 
-//mutable class
+
 public class Coffee {
     private final String name;
     private double price;
@@ -51,7 +53,8 @@ public class Coffee {
         Date expiryDate = calendar.getTime();
         if(expiryDate.compareTo(new Date()) < 0){
             System.out.println("you can't drink");
-            System.out.println(expiryDateFormatter.format(expiryDate));
+
+//            System.out.println(expiryDateFormatter.format(expiryDate));
         }else{
             System.out.println("you can drink");
         }
@@ -63,6 +66,7 @@ public class Coffee {
 //
 //        }
     }
+
 
     public static class Builder {
         private  double price;
@@ -104,9 +108,7 @@ public class Coffee {
         this.price = price;
     }
 
-    public double getTax() {
-        return tax;
-    }
+    public double getTax() { return tax; }
 
     public void setTax(double tax) {
         this.tax = tax;
@@ -134,4 +136,55 @@ public class Coffee {
                 ", producedDate=" + producedDate +
                 '}';
     }
+
+    public static void main(String[] args){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2018, 9, 5);
+
+        Coffee latter = new Builder()
+                .name("Latte")
+                .price(4.5)
+                .tax(0.11)
+                .expiry(11)
+                .producedDate(calendar.getTime())
+                .build();
+
+        System.out.println(latter);
+        latter.printExpiry();
+        assertEquals(latter.getPriceFormat(), "4.5");
+        assertEquals(latter.getTaxFormat(), "11.00%");
+
+        calendar.set(Calendar.YEAR, 2018);
+        calendar.set(Calendar.MONTH, 7);
+        calendar.set(Calendar.DAY_OF_MONTH, 21);
+
+        Coffee mocha = new Builder()
+                .name("Mocha")
+                .price(14.23)
+                .tax(0.2322)
+                .expiry(7)
+                .producedDate(calendar.getTime())
+                .build();
+        assertEquals(mocha.getPriceFormat(), "14.23");
+        assertEquals(mocha.getTaxFormat(), "23.22%");
+
+        System.out.println(mocha);
+        mocha.printExpiry();
+
+        mocha.setPrice(13.0);
+        assertEquals(mocha.getPriceFormat(),"13");
+        mocha.setTax(0.55);
+        assertEquals(mocha.getTaxFormat(),  "55.00%");
+
+        System.out.println(mocha);
+
+        mocha.setPrice(000004.5);
+        assertEquals(mocha.getPriceFormat(), "4.5");
+        mocha.setTax(0.13);
+        assertEquals(mocha.getTaxFormat(), "13.00%");
+        System.out.println(mocha);
+    }
+
+
 }
+
