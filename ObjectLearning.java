@@ -22,6 +22,14 @@ public class ObjectLearning {
             return name;
         }
 
+        @Override
+        public String toString() {
+            return "ClassTemp{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+
         public void setName(String name) {
             this.name = name;
         }
@@ -81,6 +89,17 @@ public class ObjectLearning {
 
         classTemp1.equals(classTemp2);//////////
         "dfsdf".equals("dfsdf");///////////////
+
+        classTemp1.setAge(15);
+        classTemp2.setAge(50);
+        System.out.println(classTemp1.getAge());
+        System.out.println(classTemp2.getAge());
+        classTemp1.setName("OOP244");
+        classTemp2.setName("DBS301");
+        System.out.println(classTemp1.getName());
+        System.out.println(classTemp2.getName());
+        System.out.println(classTemp1);
+        System.out.println(classTemp2);
 
     }
 
