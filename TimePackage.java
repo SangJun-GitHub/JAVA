@@ -1,7 +1,6 @@
 package com.sangjun.java_practice;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.time.chrono.JapaneseDate;
 
 public class TimePackage {
@@ -46,6 +45,26 @@ public class TimePackage {
         // equals는 모든 필드가 일치해야하는 반면 isEqual는 오직 날짜만 비교한다
         System.out.println(date3.isEqual(date4));
         System.out.println(date3.equals(date4));
+
+        //LocalDateTime -> LocalDate / LocalTime 변환
+        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDate localDate = localDateTime.toLocalDate();
+        LocalTime localTime = localDateTime.toLocalTime();
+        System.out.println(localDateTime);
+        System.out.println(localDate);
+        System.out.println(localTime);
+
+        //같은 지역내의 컴퓨터간의 데이터를 주고받을때는 문제없지만 다른 지역이라면 OffsetDataTime 이 필요
+        ZoneId zid = ZoneId.of("Asia/Seoul");
+        ZoneOffset krOffset = ZoneOffset.of("+9"); // ZonedDateTime.now().getOffset();
+        ZonedDateTime zdt = ZonedDateTime.of(localDate, localTime, zid);
+        OffsetDateTime odt = OffsetDateTime.of(localDate, localTime, krOffset);
+        System.out.println(zdt);
+        System.out.println(odt);
+        
+        //ZonedDateTime -> OffsetDaeTime
+        //OffsetDateTime odt = zdt.toOffsetDateTime();
+
 
 
     }
