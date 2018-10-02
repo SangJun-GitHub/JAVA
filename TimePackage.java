@@ -2,6 +2,8 @@ package com.sangjun.java_practice;
 
 import java.time.*;
 import java.time.chrono.JapaneseDate;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 
 public class TimePackage {
     public static void main(String[] args) {
@@ -61,10 +63,23 @@ public class TimePackage {
         OffsetDateTime odt = OffsetDateTime.of(localDate, localTime, krOffset);
         System.out.println(zdt);
         System.out.println(odt);
-        
+
         //ZonedDateTime -> OffsetDaeTime
         //OffsetDateTime odt = zdt.toOffsetDateTime();
 
+        //TemporalAdjusters
+        //ex)
+        LocalDate tmpdate = LocalDate.now();
+        LocalDate nextMonday = tmpdate.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+        System.out.println(nextMonday);
+
+        //Between(), until() Period는 Between()으로 얻을수있다
+        //Between() - static method,   until() - instant method
+
+        //negate() 부호를 반대를 변경, abs() 부호를 없셈 - period는 abs()가 없음
+        //period에는 normalized() mehod는 월값을 13으로 설정할경우 년값을 1올린다
+
+        //toTotalMonths(), toDays(), toHours(), toMinutes()
 
 
     }
