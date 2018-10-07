@@ -1,4 +1,4 @@
-package com.sangjun.assingment;
+package com.sangjun.java_practice;
 
 import java.util.Scanner;
 
