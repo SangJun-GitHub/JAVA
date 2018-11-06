@@ -6,8 +6,6 @@ package com.sangjun.java_practice;
  * Github : http://github.com/SangJun-GitHub
  */
 public class CaptionTvTest {
-<<<<<<< HEAD
-=======
     public static void main(String[] args){
         CaptionTv captionTv = new CaptionTv();
 
@@ -46,5 +44,4 @@ class CaptionTv extends Tv{
         if(caption)
             System.out.println(text);
     }
->>>>>>> origin/master
 }
