@@ -1,4 +1,4 @@
-package com.sangjun.Object_oriented_Programming1;
+package com.sangjun.java_practice;
 
 import java.util.ArrayList;
 import java.util.List;
